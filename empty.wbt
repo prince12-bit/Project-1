@@ -1,0 +1,234 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+  contactProperties [
+    ContactProperties {
+      material1 "m1"
+      material2 "m2"
+      coulombFriction [
+        0
+      ]
+      bounce 0
+      bounceVelocity 0
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.0748309867601538 -0.8334891710670389 -0.5474450886933614 2.925827126088772
+  position -0.47568685386796705 3.223871403891422 -1.3841554532115228
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation -0.00776461 0 -0.0389779
+  rotation 0 1 0 0.261799
+  contactMaterial "m2"
+  floorSize 2 1
+  floorTileSize 2 1
+  floorAppearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "Arena_LineFollower.png"
+      ]
+    }
+    metalness 0
+  }
+}
+Robot {
+  translation -0.143187 0.00151887 0.263193
+  rotation 0.013520895948457037 0.9998527003936583 0.010571796832156002 -1.3284053071795858
+  children [
+    DistanceSensor {
+      translation 0 0.06 0.03
+      rotation 0.35736909671641987 0.35765909679490393 0.8627672334946104 -1.7170853071795866
+      children [
+        Shape {
+          appearance PBRAppearance {
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.002 0.002 0.002
+          }
+        }
+      ]
+      name "ir3"
+      type "infra-red"
+      numberOfRays 20
+      aperture 0.01
+    }
+    Solid {
+      translation 0 0.007 0.02
+      children [
+        DEF caster Shape {
+          geometry Sphere {
+            radius 0.007
+          }
+        }
+      ]
+      name "solid(3)"
+      contactMaterial "m1"
+      boundingObject USE caster
+      physics Physics {
+      }
+    }
+    Solid {
+      translation 0 0.007 -0.02
+      children [
+        DEF caster Shape {
+          geometry Sphere {
+            radius 0.007
+          }
+        }
+      ]
+      name "solid(2)"
+      contactMaterial "m1"
+      boundingObject USE caster
+      physics Physics {
+      }
+    }
+    DistanceSensor {
+      translation -0.0210021 0.02 0.022
+      rotation -0.25054998039534176 -0.25074798037984897 -0.9350669268342886 1.63709
+      children [
+        Shape {
+          appearance PBRAppearance {
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.002 0.002 0.002
+          }
+        }
+      ]
+      name "ir2"
+      type "infra-red"
+      numberOfRays 20
+      aperture 0.05
+    }
+    DistanceSensor {
+      translation 0.021 0.02 0.022
+      rotation -0.25054985474514185 -0.250749854629193 -0.935066457900521 1.63709
+      children [
+        Shape {
+          appearance PBRAppearance {
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.002 0.002 0.002
+          }
+        }
+      ]
+      name "ir1"
+      type "infra-red"
+      numberOfRays 20
+      aperture 0.05
+    }
+    DistanceSensor {
+      translation 0 0.02 0.03
+      rotation 0.35736909671641987 0.35765909679490393 0.8627672334946104 -1.7170853071795866
+      children [
+        Shape {
+          appearance PBRAppearance {
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.002 0.002 0.002
+          }
+        }
+      ]
+      name "ir0"
+      type "infra-red"
+      numberOfRays 20
+      aperture 0.05
+    }
+    DEF body Transform {
+      translation 0 0.045 0
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0 0
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.07
+            radius 0.03
+          }
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 409.53519580446005
+        anchor 0.033 0.0195 0
+      }
+      device [
+        RotationalMotor {
+          name "motor2"
+        }
+      ]
+      endPoint Solid {
+        translation 0.033 0.0195 0
+        rotation -0.4717735168892732 0.47139798050164927 -0.7451266286617957 4.423105501735474
+        children [
+          DEF wheel Shape {
+            appearance PBRAppearance {
+              baseColor 0 0 1
+              roughness 1
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.01
+              radius 0.02
+            }
+          }
+        ]
+        name "solid(1)"
+        boundingObject USE wheel
+        physics Physics {
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 390.07793208203486
+        anchor -0.033 0.0195 0
+      }
+      device [
+        RotationalMotor {
+          name "motor1"
+        }
+      ]
+      endPoint Solid {
+        translation -0.033 0.0195 -2.1121382261092662e-55
+        rotation 0.2493650641569831 -0.24916656709845636 0.9358061159333989 1.6363000714007965
+        children [
+          DEF wheel Shape {
+            appearance PBRAppearance {
+              baseColor 0 0 1
+              roughness 1
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.01
+              radius 0.02
+            }
+          }
+        ]
+        boundingObject USE wheel
+        physics Physics {
+        }
+      }
+    }
+  ]
+  contactMaterial "m1"
+  boundingObject USE body
+  physics Physics {
+  }
+  controller "robotics_round_2"
+}
